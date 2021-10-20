@@ -10,54 +10,19 @@ public class BancoMain {
 
 	public static void main(String[] args) {
 
-//		Banco cuenta1 = new Banco("j", 501, 1, 50);
-//		Banco cuenta2 = new Banco("m", 502, 2, 50);
-//		Banco cuenta3 = new Banco("r", 503, 3, 50);
+		Banco cuenta1 = new Banco("j", 501, 1, 50);
+		Banco cuenta2 = new Banco("m", 502, 2, 50);
+		Banco cuenta3 = new Banco("r", 503, 3, 50);
 
 		ArrayList<Banco> cuentas = new ArrayList<Banco>();
 
-		cuentas.clear();
-//		cuentas.add(cuenta1);
-//		cuentas.add(cuenta2);
-//		cuentas.add(cuenta3);
+//		cuentas.clear();
+		cuentas.add(cuenta1);
+		cuentas.add(cuenta2);
+		cuentas.add(cuenta3);
 
-		//cliente(cuentas);
-		
-		int opcion = 1;
-		while (opcion != 0) {
-			System.out.println("1. Borrar " + "\n" + "2. Modificar Nombre" + "\n" + "3. Crear" + "\n" + "4. Ver Cuentas" + "\n" + "0. Salir");
-			opcion = sc.nextInt();sc.nextLine();
-			
-			switch (opcion) {
-				case 1: {
-					System.out.println("\n--------\n" + "BORRAR\n");
-					mBorraCuenta(cuentas);
-					System.out.println("\n--------\n");
-					break;
-				}
-				case 2: {
-					System.out.println("\n--------\n" + "MODIFICAR NOMBRE\n");
-					mModificarCuenta(cuentas);
-					System.out.println("\n--------\n");
-					break;
-				}
-				case 3: {
-					System.out.println("\n--------\n" + "CREAR\n");
-					mCrearCuenta(cuentas);
-					System.out.println("\n--------\n");
-					break;
-				}
-				case 4: {
-					System.out.println("\n--------\n" + "VER CUENTAS\n");
-					mVerCuenta(cuentas);
-					System.out.println("\n--------\n");
-					break;
-				}
-				case 0: {
-					break;
-				}
-			}
-		}
+//		cliente(cuentas);
+		administrador(cuentas);	
 	}
 
 	public static void mBienveniada(Banco cuenta) {
@@ -153,7 +118,7 @@ public class BancoMain {
 				existe = true;
 			}
 			
-			if (cuentas.get(i).nCuenta == idCuenta) { // (!existe)
+			if (!existe) {
 				System.out.println("Cuenta no existe");
 			}
 		}
@@ -172,9 +137,11 @@ public class BancoMain {
 				String nombreNuevo = sc.nextLine();
 				
 				existe = true;
+				
+				cuentas.get(i).nombre = nombreNuevo;
 			}
 			
-			if (cuentas.get(i).nCuenta == 0) { // (!existe)
+			if (!existe) { // 
 				System.out.println("Cuenta no existe");
 			} 
 		}
@@ -198,6 +165,44 @@ public class BancoMain {
 	public static void mVerCuenta(ArrayList<Banco> cuentas) {
 		for (int i = 0; i < cuentas.size(); i++) {
 			System.out.println(cuentas.get(i) + "\n");
+		}
+	}
+
+	public static void administrador(ArrayList<Banco> cuentas) {
+		int opcion = 1;
+		while (opcion != 0) {
+			System.out.println("1. Borrar " + "\n" + "2. Modificar Nombre" + "\n" + "3. Crear" + "\n" + "4. Ver Cuentas" + "\n" + "0. Salir");
+			opcion = sc.nextInt();sc.nextLine();
+			
+			switch (opcion) {
+				case 1: {
+					System.out.println("\n--------\n" + "BORRAR\n");
+					mBorraCuenta(cuentas);
+					System.out.println("\n--------\n");
+					break;
+				}
+				case 2: {
+					System.out.println("\n--------\n" + "MODIFICAR NOMBRE\n");
+					mModificarCuenta(cuentas);
+					System.out.println("\n--------\n");
+					break;
+				}
+				case 3: {
+					System.out.println("\n--------\n" + "CREAR\n");
+					mCrearCuenta(cuentas);
+					System.out.println("\n--------\n");
+					break;
+				}
+				case 4: {
+					System.out.println("\n--------\n" + "VER CUENTAS\n");
+					mVerCuenta(cuentas);
+					System.out.println("\n--------\n");
+					break;
+				}
+				case 0: {
+					break;
+				}
+			}
 		}
 	}
 }
